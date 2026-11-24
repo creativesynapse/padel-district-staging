@@ -1,0 +1,47 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Padel District staging",
+    "author": "Synapse Communications"
+  },
+  "landingPage": "/",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "wordpress.org/themes",
+        "slug": "twentytwentyfive"
+      },
+      "options": {
+        "activate": false
+      },
+      "ifAlreadyInstalled": "skip"
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/YOUR-GITHUB-USERNAME/padel-district-staging/main/padel-district-child.zip"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n$pages = array(\n\t'home' => 'Home', 'courts' => 'Courts', 'about' => 'About', 'food-drinks' => 'Food & Drinks',\n\t'visit' => 'Visit Us', 'faq' => 'FAQ', 'privacy-policy' => 'Privacy Policy', 'terms' => 'Website Terms',\n);\nforeach ( $pages as $slug => $title ) {\n\t$p = get_page_by_path( $slug, OBJECT, 'page' );\n\tif ( $p ) {\n\t\tif ( 'publish' !== $p->post_status ) { wp_publish_post( $p ); }\n\t} else {\n\t\twp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => $title, 'post_name' => $slug, 'post_content' => '' ) );\n\t}\n}\n$home = get_page_by_path( 'home', OBJECT, 'page' );\nupdate_option( 'show_on_front', 'page' );\nupdate_option( 'page_on_front', $home->ID );\nupdate_option( 'blogname', 'Padel District' );\nupdate_option( 'permalink_structure', '/%postname%/' );\nflush_rewrite_rules();\n"
+    }
+  ]
+}
