@@ -16,8 +16,8 @@
     {
       "step": "installTheme",
       "themeData": {
-        "resource": "wordpress.org/themes",
-        "slug": "twentytwentyfive"
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/creativesynapse/padel-district-staging/main/twentytwentyfive.zip"
       },
       "options": {
         "activate": false
