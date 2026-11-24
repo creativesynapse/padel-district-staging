@@ -33,7 +33,7 @@
       "step": "installTheme",
       "themeData": {
         "resource": "url",
-        "url": "https://raw.githubusercontent.com/YOUR-GITHUB-USERNAME/padel-district-staging/main/padel-district-child.zip"
+        "url": "https://raw.githubusercontent.com/creativesynapse/padel-district-staging/main/padel-district-child.zip"
       },
       "options": {
         "activate": true
